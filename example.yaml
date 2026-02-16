@@ -1,0 +1,41 @@
+{
+  "swagger": "2.0",
+  "info": { "title": "Audit Log API", "version": "1.0.0" },
+  "paths": {
+    "/audit/logs": {
+      "get": {
+        "summary": "List audit logs",
+        "description": "Fetch audit logs in RFC5424 format",
+        "operationId": "listAuditLogs",
+        "responses": {
+          "200": {
+            "description": "Audit logs response",
+            "schema": { "type": "array", "items": { "$ref": "#/definitions/AuditLog" } }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AuditLog": {
+      "title": "Audit log in RFC5424 format",
+      "description": "Audit log in RFC5424 format",
+      "type": "object",
+      "properties": {
+        "appname": { "type": "string", "title": "Application name field of the log", "description": "Application name field of the log" },
+        "struct_data": { "$ref": "#/definitions/StructuredData" }
+      },
+      "required": ["appname", "struct_data"]
+    },
+    "StructuredData": {
+      "title": "Structured data entry in RFC5424 log format",
+      "description": "Structured data entry in RFC5424 log format",
+      "type": "object",
+      "properties": {
+        "comp": { "type": "string", "title": "Component value of the log", "description": "Component value of the log" }
+      },
+      "required": ["comp"],
+      "additionalProperties": false
+    }
+  }
+}
